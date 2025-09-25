@@ -1,0 +1,85 @@
+
+students=[]
+max_students=8
+valid_courses=["cs","ece","it","mech","civil"]
+def add_student():
+    if len(students)>=max_students:
+        print("cannot add more students.limit reached")
+        return
+    sid=input("enter student id here:")
+    name=input("enter student name here:")
+    course=input("enter course(cs/ece/it/mech/civil):")
+    if course not in valid_courses:
+        print("invalid course")
+        return
+    marks=input("enter marks here:")
+    student={"id":sid,"name":name,"course":course,"marks":marks}
+    students.append(student)
+    print("student added sucessfully")
+    
+#add_student()
+def view_students():
+    if not students:
+        print("No student found")
+        return
+    print("ID\tName\tCourse\tMarks")
+    print("-"*30)
+    for s in students:
+        print(f"{s['id']}\t{s['name']}\t{s['course']}\t{s['marks']}")
+        print()
+
+#view_students()
+def search_student():
+    sid=input("enter student id to search:")
+    for s in students:
+        if s['id']==sid:
+            print(f"id:{s['id']},name:{s['name']},course:{s['course']},marks:{s['marks']}")
+            return
+    print("student not found")
+search_student()
+def update_student():
+    sid=input("enter student id to update:")
+    for s in students:
+        if s["id"]==sid:
+            s["name"]=input("enter new name:")
+            s["course"]=input("enter new course:")
+            s["marks"]=input("enter new marks:")
+            print("student updated sucessfully")
+            return
+        print("student id did not match")
+#update_student()
+def delete_student():
+    sid=input("enter student id to delete:")
+    for s in students:
+        if s['id']==sid:
+            students.remove(s)
+            print("student deleted sucessfully")
+            return
+        print("student not found")
+#delete_student()
+def menu():
+    while True:
+        print("...student management system...")
+        print("1.Add student")
+        print("2.View student")
+        print("3.Serach student")
+        print("4.Update student")
+        print("5.Delete student")
+        print("6.Exit")
+        choice=input("enter your choice here:")
+        if choice=="1":
+            add_student()
+        elif choice=="2":
+            view_students()
+        elif choice=="3":
+            search_student()
+        elif choice=="4":
+            update_student()
+        elif choice=="5":
+            delete_student()
+        elif choice=="6":
+            print("exit")
+            break
+        else:
+            print("invalid")
+menu()
